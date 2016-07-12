@@ -1,7 +1,7 @@
 <?php
 
 class Core_Config_Ini extends Core_Config_Abstract{
-
+	
 	protected $config;
 	
 	public function __construct( $config ){
@@ -10,21 +10,7 @@ class Core_Config_Ini extends Core_Config_Abstract{
 	}
 
 	protected function parseIniFile( $config ){
-		$result = array();
-		$configArray = parse_ini_file( $config );
-
-		foreach($configArray as $key => $val){
-			$ks = explode(".",$key);
-
-			$kresult = array();
-			foreach($ks as $ksval){
-				$kresult[ $ksval ] = array();
-
-			}
-			$result[] = $kresult;
-			print_r($kresult);
-		}
-
+		$result = parse_ini_file( $config );
 		return $result;
 	}
 
@@ -36,9 +22,6 @@ class Core_Config_Ini extends Core_Config_Abstract{
 	public function get( $key ){
 		return $this->config[ $key ];
 	}
-
-
-
 
 }
 

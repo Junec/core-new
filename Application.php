@@ -20,10 +20,12 @@ class Core_Application{
 	public function run(){
 		include_once "Loader.php";
 		spl_autoload_register(array('Core_Loader','autoload'));
-		
-		#$rs = $this->getConfig()->get("application.name");
-		$rs = $this->getConfig();
-		print_r( $rs );
+		Core_Registry::set("config", $this->getConfig() );
+
+		$view = Core_Loader::getInstance("Core_View_Simple", $this->getConfig()->get("application.directory"));
+		$view->content = "this is content!";
+		$view->display("index/index.phtml");
+
 
 	}
 
