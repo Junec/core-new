@@ -5,8 +5,9 @@ class Core_View_Simple implements Core_View_Interface{
 	protected $path = '';
 	protected $vars = array();
 
-	public function __construct( $path ){
-		$this->path = $path . "/views";
+	public function __construct(){
+		$this->path = APP_PATH . "/views";
+
 	}
 
 	public function setTplPath($path = ''){

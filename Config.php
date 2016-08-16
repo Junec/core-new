@@ -1,28 +1,20 @@
 <?php
 
-class Core_Config_Ini extends Core_Config_Abstract{
-	
+class Core_Config{
 	protected $config;
 	
 	public function __construct( $config ){
-		$this->config = $this->parseIniFile( $config );
+		$this->config = include_once $config;
 
-	}
-
-	protected function parseIniFile( $config ){
-		$result = parse_ini_file( $config );
-		return $result;
 	}
 
 	public function __get( $var ){
 		return $this->config[ $var ];
 	}
 
-
 	public function get( $key ){
 		return $this->config[ $key ];
 	}
-
 }
 
 ?>

@@ -13,13 +13,13 @@ class Core_Loader{
 			$path = CORE_PATH . "/" . str_replace("_", "/", substr($class, 5));
 
 		}elseif(substr($class, $classLen - 10) == 'Controller'){
-			$path = APP_PATH . "/controller/" . str_replace("_", "/", substr($class, 0, $classLen - 10));
+			$path = APP_PATH . "/controllers/" . str_replace("_", "/", substr($class, 0, $classLen - 10));
 
 		}elseif(substr($class, $classLen - 5) == 'Model'){
-			$path = APP_PATH . "/controller/" . str_replace("_", "/", substr($class, 0, $classLen - 5));
+			$path = APP_PATH . "/model/" . str_replace("_", "/", substr($class, 0, $classLen - 5));
 
 		}elseif(substr($class, $classLen - 6) == 'Plugin'){
-			$path = APP_PATH . "/controller/" . str_replace("_", "/", substr($class, 0, $classLen - 6));
+			$path = APP_PATH . "/plugin/" . str_replace("_", "/", substr($class, 0, $classLen - 6));
 
 		}else{
 			$path = APP_PATH . "/library/" . str_replace("_", "/", $class);

@@ -9,26 +9,19 @@ class Core_Application{
 	}
 
 	public function getConfig(){
-		return Core_Loader::getInstance("Core_Config_Ini", $this->config );
+		return Core_Loader::getInstance("Core_Config", $this->config );
 	}
 
-	public function bootstrap(){
-
-		return $this;
-	}
-
-	public function run(){
+	public function init(){
 		include_once "Loader.php";
 		spl_autoload_register(array('Core_Loader','autoload'));
 		Core_Registry::set("config", $this->getConfig() );
-
-		$view = Core_Loader::getInstance("Core_View_Simple", $this->getConfig()->get("application.directory"));
-		$view->content = "this is content!";
-		$view->display("index/index.phtml");
-
-
 	}
 
+	public function run(){
+		$this->init();
+		Core_Loader::getInstance("Core_Dispatcher")->dispatch();
+	}
 }
 
 ?>
