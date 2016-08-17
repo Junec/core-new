@@ -27,7 +27,12 @@ class Core_Loader{
 		}
 
 		$path .= ".php";
-		include_once $path;
+		if(file_exists($path)){
+			include_once $path;
+		}else{
+			throw new Core_Exception("include file not exists: {$path}");
+		}
+		
 	}
 
 	static public function getInstance( $class , $param = '' ){

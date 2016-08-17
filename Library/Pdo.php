@@ -121,7 +121,11 @@ class Core_Library_Pdo{
     public function prepareExecute($sql = '', $value = array(), $driver_options = array()){
         $statement = $this->pdo->prepare($sql,$driver_options);
         $this->statement = $statement;
-        return $statement->execute($value);
+        $result = $statement->execute($value);
+        if($statement->errorCode() !== '00000'){
+            throw new Core_Exception( join(',',$statement->errorInfo()) );
+        }
+        return $result;
     }
 
     public function getRowCount(){

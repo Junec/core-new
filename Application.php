@@ -16,11 +16,20 @@ class Core_Application{
 		include_once "Loader.php";
 		spl_autoload_register(array('Core_Loader','autoload'));
 		Core_Registry::set("config", $this->getConfig() );
+		
+		define("BASE_PATH",rtrim(Core_Registry::get("config")->application['base_path'],"/"));
 	}
 
 	public function run(){
-		$this->init();
-		Core_Loader::getInstance("Core_Dispatcher")->dispatch();
+		try{
+			$this->init();
+			Core_Loader::getInstance("Core_Dispatcher")->dispatch();
+
+		}catch(Exception $e){
+			Core_Loader::getInstance("Core_Handler")->exception($e);
+			
+		}
+		
 	}
 }
 

@@ -9,7 +9,7 @@ class Core_Controller_Abstract{
 			$this->$action();
 		}else{
 			$controller = get_class($this);
-			trigger_error("Action: \"{$controller}::{$action}()\" not found!", E_USER_ERROR);
+			throw new Core_Exception("Action not found: {$controller}::{$action}()");
 		}
 	}
 

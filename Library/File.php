@@ -46,7 +46,7 @@ class Core_Library_File{
         if (!$handle = fopen($fileName, $method)) return false;
         $ifLock && flock($handle, LOCK_EX);
         $writeCheck = fwrite($handle, $data);
-        $method == self::READWRITE && ftruncate($handle, strlen($data));
+        $method == "rb+" && ftruncate($handle, strlen($data));
         fclose($handle);
         $ifChmod && @chmod($fileName, 0777);
         return $writeCheck;

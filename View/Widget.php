@@ -15,6 +15,16 @@ class Core_View_Widget extends Core_View_Simple{
     	}
     	return $this->fetch( $this->tpl() );
     }
+
+    public function getPath(){
+        $widgetName = get_class($this);
+        $length = strlen($widgetName);
+        $widgetName = substr($widgetName,0,$length - 6);
+        $widgetName = str_replace("_","/",$widgetName);
+        $path = BASE_PATH . "/widget";
+        $path .= "/" . $widgetName;
+        return $path;
+    }
 }
 
 ?>
