@@ -4,14 +4,6 @@ class Core_Controller_Abstract{
 	
 	protected $request;
 
-	public function getView(){
-		return Core_Loader::getInstance("Core_View_Simple");
-	}
-
-	public function getRequest(){
-		return Core_Loader::getInstance("Core_Request_Abstract");
-	}
-
 	public function exec($action){
 		if( method_exists($this, $action) ){
 			$this->$action();
@@ -20,6 +12,15 @@ class Core_Controller_Abstract{
 			trigger_error("Action: \"{$controller}::{$action}()\" not found!", E_USER_ERROR);
 		}
 	}
+
+	public function getView(){
+		return Core_Loader::getInstance("Core_View_Simple");
+	}
+
+	public function getRequest(){
+		return Core_Loader::getInstance("Core_Request_Abstract");
+	}
+
 }
 
 ?>

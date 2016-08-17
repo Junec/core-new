@@ -43,6 +43,10 @@ class Core_View_Simple implements Core_View_Interface{
 		return $this->vars;
 	}
 
+	public function widget($widget = '', $params = array()){
+		return Core_Loader::getInstance($widget)->render( $params );
+	}
+
 }
 
 ?>

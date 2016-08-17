@@ -21,6 +21,9 @@ class Core_Loader{
 		}elseif(substr($class, $classLen - 6) == 'Plugin'){
 			$path = APP_PATH . "/plugin/" . str_replace("_", "/", substr($class, 0, $classLen - 6));
 
+		}elseif(substr($class, $classLen - 6) == 'Widget'){
+			$path = APP_PATH . "/widget/" . str_replace("_", "/", substr($class, 0, $classLen - 6));
+
 		}else{
 			$path = APP_PATH . "/library/" . str_replace("_", "/", $class);
 
