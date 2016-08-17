@@ -16,10 +16,7 @@ class Core_Loader{
 			$path = APP_PATH . "/controllers/" . str_replace("_", "/", substr($class, 0, $classLen - 10));
 
 		}elseif(substr($class, $classLen - 5) == 'Model'){
-			$path = APP_PATH . "/model/" . str_replace("_", "/", substr($class, 0, $classLen - 5));
-
-		}elseif(substr($class, $classLen - 6) == 'Plugin'){
-			$path = APP_PATH . "/plugin/" . str_replace("_", "/", substr($class, 0, $classLen - 6));
+			$path = APP_PATH . "/models/" . str_replace("_", "/", substr($class, 0, $classLen - 5));
 
 		}elseif(substr($class, $classLen - 6) == 'Widget'){
 			$path = APP_PATH . "/widget/" . str_replace("_", "/", substr($class, 0, $classLen - 6));
@@ -35,7 +32,11 @@ class Core_Loader{
 
 	static public function getInstance( $class , $param = '' ){
         if( !isset(self::$instance[$class]) || self::$instance[$class] == '' ){
-            self::$instance[$class] = new $class( $param );
+        	if(empty($param)){
+        		self::$instance[$class] = new $class();
+        	}else{
+        		self::$instance[$class] = new $class( $param );
+        	}
         }
         return self::$instance[$class];
 	}
