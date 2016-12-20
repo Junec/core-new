@@ -1,8 +1,12 @@
 <?php
 
 class Core_View_Widget extends Core_View_Simple{
-    public function vars(){}
-    public function tpl(){}
+    public function vars(){
+        return array();
+    }
+    public function tpl(){
+        
+    }
 
     public function render( $params = array() ){
     	$this->setTplPath( APP_PATH . "/widget" );

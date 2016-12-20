@@ -30,7 +30,7 @@ class Core_Cache_Filesystem extends Core_Cache_Abstract{
 	}
 
 	public function get($key = ''){
-		if( $key == '' ) return null;
+		if( $key == '' ) return false;
 		$oriKey = $key;
         $key = $this->hashKey($key);
         $file = $this->getPath().$key;
@@ -40,12 +40,12 @@ class Core_Cache_Filesystem extends Core_Cache_Abstract{
             if($value["overdueTime"] > 0){
             	if(time() - $value["dateline"] >= $value["overdueTime"]){
 	            	$this->delete($oriKey);
-	            	return null;
+	            	return false;
 	            }
             }
             return $value["value"];
         }else{
-            return null;
+            return false;
         }
 	}
 

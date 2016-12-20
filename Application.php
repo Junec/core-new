@@ -14,9 +14,10 @@ class Core_Application{
 
 	public function init(){
 		include_once "Loader.php";
+		header("Content-type:text/html;charset=utf-8");
 		spl_autoload_register(array('Core_Loader','autoload'));
 		Core_Registry::set("config", $this->getConfig() );
-		
+
 		define("BASE_PATH",rtrim(Core_Registry::get("config")->application['base_path'],"/"));
 	}
 

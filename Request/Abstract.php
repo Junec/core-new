@@ -28,18 +28,23 @@ class Core_Request_Abstract{
     	$scriptBaseName = basename($scriptName);
 		$pathInfo = "";
 
-		if(!empty($this->getServer('PATH_INFO'))){
+		$PATH_INFO = $this->getServer('PATH_INFO');
+		$ORIG_PATH_INFO = $this->getServer('ORIG_PATH_INFO');
+		$REQUEST_URI = $this->getServer('REQUEST_URI');
+		$PHP_SELF = $this->getServer('PHP_SELF');
+
+		if(!empty($PATH_INFO)){
             $pathInfo = $this->getServer('PATH_INFO');
 
-        }elseif(!empty($this->getServer('ORIG_PATH_INFO'))){
+        }elseif(!empty($ORIG_PATH_INFO)){
             $pathInfo = $this->getServer('ORIG_PATH_INFO');
 
-        }elseif(!empty($this->getServer('REQUEST_URI'))){
+        }elseif(!empty($REQUEST_URI)){
             $pathInfo = str_replace(array($scriptDirName,$scriptBaseName),array('',''),$this->getServer('REQUEST_URI'));
 
-        }elseif(!empty($this->getServer('PHP_SELF'))){
+        }elseif(!empty($PHP_SELF)){
             $pathInfo = str_replace(array($scriptDirName,$scriptBaseName),array('',''),$this->getServer('PHP_SELF'));
-            
+
         }
 
         $pathInfo = trim($pathInfo,"/");

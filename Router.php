@@ -6,8 +6,8 @@ class Core_Router{
 	protected $action_tag = 'act';
 
 	protected $router;
-	protected $controller;
-	protected $action;
+	protected $controller = 'index';
+	protected $action = 'index';
 
 	public function __construct(){
 		$this->analysis();
@@ -21,9 +21,25 @@ class Core_Router{
 		unset($params[ $this->router_tag ]);
 		$pathInfo = $request->get( $this->router_tag );
 
+        if(isset($params[ $this->controller_tag ]) && !empty($params[ $this->controller_tag ]) ){
+            $this->controller = $params[ $this->controller_tag ];
+        }
+        if(isset($params[ $this->action_tag ]) && !empty($params[ $this->action_tag ]) ){
+            $this->action = $params[ $this->action_tag ];
+        }
+
         if( isset($routers[ $pathInfo ]) ){
         	/* 普通路由 */
             $routerInfo = $routers[ $pathInfo ];
+            if( isset($routerInfo["params"]) && !empty($routerInfo["params"]) ){
+                $routerParams = $this->getParseStr($routerInfo["params"]);
+                foreach($routerParams as $rpk => $rpv){
+                    $_routerParams[$rpk] = $rpv;
+                }
+                unset( $routerInfo["params"] );
+            }
+            $routerInfo = array_merge($routerInfo , $_routerParams, $params);
+
         }else{
             /* 泛路由 */
             foreach($routers as $routerName => $routerValue){
@@ -45,7 +61,6 @@ class Core_Router{
                 }
             }
         }
-
         if( $routerInfo ){
 	        $this->router = $pathInfo;
 	        $this->controller = $routerInfo[ $this->controller_tag ];
@@ -54,6 +69,8 @@ class Core_Router{
 	        	$request->setGet($k,$v);
 	        }
 	    }
+        $request->setGet($this->controller_tag,$this->controller);
+        $request->setGet($this->action_tag,$this->action);
 	}
 
 	public function getController(){

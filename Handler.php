@@ -22,13 +22,7 @@ class Core_Handler{
     public function exception($e){
         $exception = get_class($e);
 		$msg = '['.$exception.'] '.$e->getMessage()."\n".$e->getTraceAsString();
-		$this->httpError("500 Internal Server Error");
-    }
-
-    public function httpError($code){
-        header("HTTP/1.1 {$code}");
-        header("status: {$code}");
-        echo "{$code}";
+        echo $msg;
         exit;
     }
 

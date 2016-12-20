@@ -8,7 +8,6 @@ class Core_Dispatcher{
 
 	public function dispatch(){
 		$router = $this->getRouter();
-		
 		$controller = $router->getController();
 		$controllers = explode("_",$controller);
 		foreach($controllers as $k => $v){

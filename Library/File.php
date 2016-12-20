@@ -265,12 +265,12 @@ class Core_Library_File{
      *
      * @return string or boolean
      */
-    public function upload($file,$maxsize='',$isRename = false,$filetype = array(),$dir = ''){
-        $result = array('status'=>'succ','msg'=>'','path'=>'');
+    public function upload($file, $maxsize='', $isRename = false, $filetype = array(), $dir = ''){
+        $result = array('status'=>'succ','msg'=>'','path'=>'','filename'=>'');
         set_time_limit(0); //限制最大的执行时间
-        $localPath = 'data/upload/';
-        if($dir != '') $localPath = trim($dir,'/').'/';
-        $dir = ROOT_DIR.'/'.$localPath;//保存目录
+        if($dir == ""){
+            $dir = APP_PATH . "/upload/";//保存目录
+        }
         $maxsize = $maxsize*1024;
         if(!empty($file['error'])){
             switch($file['error']){
@@ -346,9 +346,9 @@ class Core_Library_File{
             return $result;
         }
         @chmod($filePath, 0644);
-        $localFilePath = $localPath.$newFileName;
         $result['msg'] = '上传成功';
-        $result['path'] = $localFilePath;
+        $result['path'] = $filePath;
+        $result['filename'] = $newFileName;
         return $result;
     }
 }

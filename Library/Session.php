@@ -5,7 +5,7 @@
  * @author June Chen <594553417@qq.com>
  * @copyright  Copyright (c) 2016.
  */
-class Core_Library_String{
+class Core_Library_Session{
     /**
      * 设置session
      * 

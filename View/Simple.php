@@ -10,15 +10,15 @@ class Core_View_Simple implements Core_View_Interface{
 
 	}
 
-	public function setTplPath($path = ''){
+	public function setTplPath( $path  ){
 		$this->path = $path;
 	}
 
-	public function assign($var = '', $value){
+	public function assign( $var, $value ){
 		$this->vars[ $var ] = $value;
 	}
 
-	public function fetch($tpl = ''){
+	public function fetch( $tpl ){
 		extract($this->getVars(), EXTR_OVERWRITE);
 		ob_start();
         ob_implicit_flush(0);
@@ -27,15 +27,15 @@ class Core_View_Simple implements Core_View_Interface{
         return $fetch;
 	}
 
-	public function display($tpl = ''){
+	public function display( $tpl ){
 		echo $this->fetch($tpl);
 	}
 
-	public function __set($var, $value){
+	public function __set( $var, $value ){
 		$this->vars[ $var ] = $value;
 	}
 
-	public function __get($var){
+	public function __get( $var ){
 		return $this->vars[ $var ];
 	}
 
