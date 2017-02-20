@@ -251,28 +251,6 @@ class Core_Library_File{
         fclose($localFile);
         return $localPath;
     }
-    
-    
-    /**
-     * 下载远程指定文件
-     *
-     * @param string $url 文件路径
-     * @param string $saveTo 相对于Data/File/下的保存目录
-     * @return string or boolean
-     */
-    public function downloadFile($url = '', $saveTo = '', $filename = ''){
-        set_time_limit(0); //限制最大的执行时间
-        $this->mk($saveTo);//判断文件夹是否存在
-        $ch = curl_init();
-    	curl_setopt($ch, CURLOPT_POST, 0); 
-    	curl_setopt($ch,CURLOPT_URL,$url); 
-    	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-    	$fileContent = curl_exec($ch);
-    	curl_close($ch);
-    	$downloadedFile = fopen($saveTo . $filename, 'w');
-    	fwrite($downloadedFile, $fileContent);
-    	fclose($downloadedFile);
-    }
 
     /**
      * 文件重命名规则

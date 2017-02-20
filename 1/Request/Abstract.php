@@ -12,6 +12,7 @@ class Core_Request_Abstract{
 		$this->post = $_POST;
 		$this->request = $_REQUEST;
 		$this->server = $_SERVER;
+		$this->files = $_FILES;
 	}
 
 	public function getScriptName(){
@@ -71,12 +72,21 @@ class Core_Request_Abstract{
 		return false;	
 	}
 
+	public function getFile($key = ''){
+		if( isset($this->files[$key]) ) return $this->files[$key];
+		return false;	
+	}
+
 	public function gets(){
 		return $this->get;
 	}
 
 	public function getPosts(){
 		return $this->post;
+	}
+
+	public function getFiles(){
+		return $this->file;
 	}
 
 	public function getServer($key = ''){
